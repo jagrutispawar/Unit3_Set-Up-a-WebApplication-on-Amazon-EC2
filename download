@@ -1,0 +1,13 @@
+# Terraform generated files and secrets
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+crash.*.log
+terraform.tfvars
+*.pem
+*.key
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json

@@ -1,0 +1,29 @@
+#!/bin/bash
+set -euxo pipefail
+apt-get update -y
+DEBIAN_FRONTEND=noninteractive apt-get install -y nginx
+cat > /var/www/html/index.html <<'HTML'
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${site_title}</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f0f4f8; text-align: center; padding: 80px 20px; }
+    main { max-width: 680px; margin: auto; background: white; padding: 36px; border-radius: 14px; }
+    h1 { color: #232f3e; }
+    p { color: #555; line-height: 1.6; }
+    .badge { display: inline-block; background: #ff9900; color: #fff; padding: 8px 16px; border-radius: 6px; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Hello from Amazon EC2!</h1>
+    <p>This web application is hosted on an Ubuntu EC2 instance using Nginx.</p>
+    <span class="badge">Deployed by: ${site_name}</span>
+  </main>
+</body>
+</html>
+HTML
+systemctl enable --now nginx
